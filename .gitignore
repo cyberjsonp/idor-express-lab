@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+
+# فایل‌های محیطی
+.env
+.env.local
+.env.*.local
+
+# لاگ‌ها
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# فایل‌های سیستم عامل
+.DS_Store
+Thumbs.db
+
+# فایل‌های IDE
+.vscode/
+.idea/
+*.swp
+*.swo
