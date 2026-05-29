@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'ShopVault' %> | ShopVault</title>
+    <script src="/js/tailwind.play.min.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+    <style>
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:0.7}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+        .animate-float{animation:float 3s ease-in-out infinite}
+        .animate-slideUp{animation:slideUp 0.6s ease}
+        .animate-pulse-soft{animation:pulse-soft 2s ease-in-out infinite}
+        .animate-fadeIn{animation:fadeIn 0.5s ease}
+        .animate-shake{animation:shake 0.4s ease}
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    
+    <% if (typeof user !== 'undefined') { %>
+    <!-- TOP BAR -->
+    <div class="bg-gray-900 text-gray-400 text-xs py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex gap-6">
+                <span>📞 (555) 123-4567</span>
+                <span class="hidden sm:inline">✉️ support@shopvault.com</span>
+            </div>
+            <div class="flex gap-4">
+                <span>🚚 Free shipping over $50</span>
+                <span class="hidden sm:inline">|</span>
+                <a href="/challenges" class="text-yellow-400 hover:text-yellow-300 font-semibold hidden sm:inline">🏴‍☠️ CTF Lab</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="bg-white shadow-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <a href="/dashboard" class="flex items-center gap-2 text-2xl font-black hover:opacity-80 transition">
+                    <span class="text-3xl">🛒</span>
+                    <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">ShopVault</span>
+                </a>
+                <div class="hidden md:flex flex-1 max-w-xl mx-8">
+                    <div class="relative w-full">
+                        <input type="text" class="w-full pl-5 pr-14 py-2.5 bg-gray-100 border-2 border-gray-200 rounded-full text-sm focus:outline-none focus:border-indigo-400 focus:bg-white transition" placeholder="Search products...">
+                        <button class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700 transition text-sm">🔍</button>
+                    </div>
+                </div>
+                <nav class="flex items-center gap-1">
+                    <a href="/dashboard" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition">🏠 Home</a>
+                    <a href="/orders" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition">📦 Orders</a>
+                    <a href="/profile" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-indigo-600 rounded-lg hover:bg-gray-50 transition">👤 Profile</a>
+                    <div class="ml-3 pl-3 border-l border-gray-200 flex items-center gap-3">
+                        <a href="/profile" class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold hover:shadow-lg transition"><%= user.username.charAt(0).toUpperCase() %></a>
+                        <div class="hidden sm:block">
+                            <p class="text-sm font-semibold text-gray-900 leading-tight">@<%= user.username %></p>
+                            <a href="/logout" class="text-xs text-red-500 hover:text-red-700 font-medium">Sign out</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main class="min-h-screen"><%- body %></main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 mt-20">
+        <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div>
+                <h4 class="text-white font-bold text-xl mb-4 flex items-center gap-2"><span class="text-2xl">🛒</span> ShopVault</h4>
+                <p class="text-sm leading-relaxed">Your premium electronics store. Great products, unbeatable prices, and a hidden CTF lab for security researchers.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">🛍️ Shop</h4>
+                <ul class="space-y-2 text-sm"><li><a href="/dashboard" class="hover:text-white transition">Deals</a></li><li><a href="/orders" class="hover:text-white transition">My Orders</a></li><li><a href="/profile" class="hover:text-white transition">My Addresses</a></li></ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">📞 Support</h4>
+                <ul class="space-y-2 text-sm"><li>📞 (555) 123-4567</li><li>✉️ help@shopvault.com</li><li>🕐 Mon-Fri 9am-6pm EST</li></ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">🏴‍☠️ CTF Lab</h4>
+                <p class="text-xs text-yellow-400 bg-yellow-400/10 p-3 rounded-xl border border-yellow-400/20 leading-relaxed">⚠️ This e-commerce platform contains intentional IDOR vulnerabilities for educational purposes. Find the flags!</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 py-6 text-center text-sm">© 2024 ShopVault. All rights reserved. | 🛡️ Bug Bounty Training Lab v1.0</div>
+    </footer>
+    <% } else { %>
+    <%- body %>
+    <% } %>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

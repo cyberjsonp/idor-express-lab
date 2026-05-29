@@ -1,0 +1,29 @@
+<div class="space-y-8 animate-fadeIn max-w-4xl mx-auto py-8">
+    <div class="text-center">
+        <h1 class="text-4xl font-black text-gray-900 mb-3">🏴‍☠️ CTF Challenges</h1>
+        <p class="text-gray-500 text-lg">Exploit the vulnerabilities. Find the flags. Prove your skills.</p>
+    </div>
+    
+    <% if (typeof success !== 'undefined' && success) { %><div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-xl flex items-center gap-3 font-medium"><span>✅</span><%= success %></div><% } %>
+    <% if (typeof error !== 'undefined' && error) { %><div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl flex items-center gap-3 font-medium"><span>❌</span><%= error %></div><% } %>
+
+    <div class="grid gap-6">
+        <% challenges.forEach(function(challenge) { %>
+        <div class="bg-white rounded-2xl shadow-lg border-2 border-gray-100 hover:border-indigo-400 transition-all duration-300 p-7">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div class="flex items-center gap-4">
+                    <span class="text-5xl font-black text-indigo-200">#<%= challenge.id %></span>
+                    <div><h2 class="text-xl font-black text-gray-900"><%= challenge.title %></h2><div class="flex gap-2 mt-1"><span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold"><%= challenge.category %></span><span class="px-2.5 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs font-mono"><%= challenge.endpoint %></span></div></div>
+                </div>
+                <span class="px-4 py-2 rounded-full text-xs font-bold uppercase <%= challenge.difficulty==='Easy'?'bg-green-100 text-green-700':challenge.difficulty==='Medium'?'bg-yellow-100 text-yellow-700':'bg-red-100 text-red-700' %>"><%= challenge.difficulty %></span>
+            </div>
+            <p class="text-gray-600 mb-4"><%= challenge.description %></p>
+            <details class="mb-4"><summary class="cursor-pointer text-indigo-600 font-bold hover:text-indigo-700 transition">💡 Need a hint?</summary><p class="mt-3 p-4 bg-amber-50 rounded-xl text-amber-800 text-sm border border-amber-200"><%= challenge.hint %></p></details>
+            <div class="flex gap-3">
+                <input type="text" class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl font-mono text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50 outline-none transition" placeholder="FLAG{...}" data-challenge-id="<%= challenge.id %>" autocomplete="off">
+                <button onclick="submitFlag(<%= challenge.id %>, this.previousElementSibling)" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-lg transition text-sm">✅ Submit</button>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>

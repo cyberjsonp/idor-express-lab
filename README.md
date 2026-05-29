@@ -10,13 +10,20 @@ node app.js
 
 Visit: http://localhost:3000
 
-
-🔐 Test Credentials
-Username	Password
-ali	1234
-sara	1234
-reza	1234
-admin	admin123
+==================================================
+🐛  Bug Bounty Lab - Ready!
+==================================================
+📍  URL: http://localhost:3000
+🔑  Login: http://localhost:3000/login
+==================================================
+📋  Test Credentials:
+   alice   / password123  (user)
+   bob     / password123  (user)
+   charlie / password123  (user)
+   admin   / admin2024!   (admin)
+==================================================
+🎯  Challenges available at: /challenges
+==================================================
 
 
 

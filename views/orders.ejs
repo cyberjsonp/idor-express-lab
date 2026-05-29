@@ -1,0 +1,26 @@
+<div class="space-y-8 animate-fadeIn max-w-5xl mx-auto py-8">
+    <div class="text-center">
+        <h1 class="text-4xl font-black text-gray-900 mb-2">📦 My Orders</h1>
+        <p class="text-gray-500">Track your purchases and shipments</p>
+    </div>
+
+    <% if (orders.length === 0) { %>
+    <div class="text-center py-16 bg-white rounded-3xl shadow-lg"><div class="text-7xl mb-4">📭</div><h3 class="text-2xl font-bold text-gray-900">No Orders Yet</h3><p class="text-gray-500 mt-2">Start shopping!</p></div>
+    <% } else { %>
+    <div class="space-y-4">
+        <% orders.forEach(function(order) { %>
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group">
+            <div class="p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="text-5xl"><% if(order.product.includes('MacBook')||order.product.includes('لپتاپ')){ %>💻<% }else if(order.product.includes('Mouse')||order.product.includes('موس')){ %>🖱️<% }else if(order.product.includes('Keyboard')||order.product.includes('کیبورد')){ %>⌨️<% }else if(order.product.includes('Monitor')||order.product.includes('مانیتور')){ %>🖥️<% }else if(order.product.includes('USB')){ %>🔌<% }else if(order.product.includes('Headphone')||order.product.includes('هدفون')){ %>🎧<% }else{ %>📦<% } %></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><code class="text-xs bg-gray-100 px-2 py-0.5 rounded font-mono text-gray-500">#ORD-<%= String(order.id).padStart(3,'0') %></code><span class="px-2.5 py-0.5 rounded-full text-xs font-bold <%= order.status==='delivered'?'bg-green-100 text-green-700':order.status==='shipped'?'bg-blue-100 text-blue-700':order.status==='pending'?'bg-yellow-100 text-yellow-700':order.status==='classified'?'bg-red-100 text-red-700 animate-pulse':'bg-gray-100 text-gray-600' %>"><%= order.status %></span></div>
+                    <h3 class="text-lg font-bold text-gray-900"><%= order.product %></h3>
+                    <p class="text-gray-500 text-sm"><%= order.details %></p>
+                </div>
+                <a href="/orders/<%= order.id %>" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 hover:shadow-lg transition text-sm text-center whitespace-nowrap">🔍 View →</a>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <% } %>
+</div>

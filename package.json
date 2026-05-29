@@ -6,12 +6,18 @@
   "scripts": {
     "start": "node app.js"
   },
-  "keywords": ["bug-bounty", "idor", "security", "vulnerable-app"],
+  "keywords": [
+    "bug-bounty",
+    "idor",
+    "security",
+    "vulnerable-app"
+  ],
   "author": "YOUR_NAME",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "sqlite3": "^5.1.6"
   }
