@@ -1,7 +1,10 @@
+<h1 align="center" id="title">IDOR BugBounty Labs</h1>
+
+<p align="center"><img src="https://github.com/cyberjsonp/idor-express-lab.git" alt="project-image"></p>
+
+<p id="description">A realistic **e-commerce web application** intentionally vulnerable to **IDOR (Insecure Direct Object Reference)** attacks. Practice finding and exploiting IDOR vulnerabilities in a safe local environment.</p>
 
 
-```markdown
-# 🛒 ShopVault — Bug Bounty IDOR Lab
 
 A realistic **e-commerce web application** intentionally vulnerable to **IDOR (Insecure Direct Object Reference)** attacks. Practice finding and exploiting IDOR vulnerabilities in a safe, local environment.
 
