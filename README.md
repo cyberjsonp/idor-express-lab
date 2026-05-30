@@ -1,15 +1,21 @@
-<h1 align="center" id="title">IDOR BugBounty Labs</h1>
+# 📝 `README.md` — نسخه آپدیت شده با ۷ چالش (بدون Hint)
+
+```markdown
+<h1 align="center" id="title">🛒 ShopVault — IDOR Bug Bounty Labs</h1>
 
 <p align="center"><img width=200 height=200 src="/public/kilroywashere.jpg" alt="project-image"></p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-18+-green" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express-4.x-blue" alt="Express">
+  <img src="https://img.shields.io/badge/TailwindCSS-3.x-38bdf8" alt="TailwindCSS">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+  <img src="https://img.shields.io/badge/Challenges-7-red" alt="Challenges">
+</p>
 
+---
 
-A realistic **e-commerce web application** intentionally vulnerable to **IDOR (Insecure Direct Object Reference)** attacks. Practice finding and exploiting IDOR vulnerabilities in a safe, local environment.
-
-![Node.js](https://img.shields.io/badge/Node.js-18+-green)
-![Express](https://img.shields.io/badge/Express-4.x-blue)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-38bdf8)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+A realistic **e-commerce web application** intentionally vulnerable to **IDOR (Insecure Direct Object Reference)** attacks. Explore features like shopping, support tickets, file sharing, and account settings — each hiding a unique IDOR vulnerability.
 
 ---
 
@@ -35,57 +41,32 @@ Visit: **http://localhost:3000**
 
 ---
 
-## 🎯 Challenges (5 IDOR Scenarios)
+## 🎯 Challenges (7 IDOR Scenarios)
 
-| # | Challenge | Difficulty | Type | Endpoint |
-|---|-----------|------------|------|----------|
-| 1 | **Read Other Users' Orders** | 🟢 Easy | Read IDOR | `GET /orders/:id` |
-| 2 | **Delete Other Users' Addresses** | 🟡 Medium | Write IDOR | `POST /api/address/delete` |
-| 3 | **Download Private Attachments** | 🔴 Hard | Read IDOR | `GET /attachments/download/:id` |
-| 4 | **Hijack Notification Settings** | 🟡 Medium | Write IDOR | `POST /api/subscriptions/update` |
-| 5 | **Checkout with Another User's Address** | 🔴 Hard | Hidden Body IDOR | `POST /api/checkout` |
+| # | Challenge | Difficulty | Type | Technique |
+|---|-----------|------------|------|-----------|
+| 1 | **Read Other Users' Orders** | 🟢 Easy | Read IDOR | URL Parameter |
+| 2 | **Delete Other Users' Addresses** | 🟡 Medium | Write IDOR | Body Parameter |
+| 3 | **Download Private Attachments** | 🔴 Hard | Read IDOR | Sequential IDs |
+| 4 | **Hijack Notification Settings** | 🟡 Medium | Write IDOR | Body Parameter |
+| 5 | **Checkout with Another User's Address** | 🔴 Hard | Hidden Body IDOR | JSON Body |
+| 6 | **GUID Leak & File Access Chain** | 🔴 Hard | Info Leak + IDOR | GUID Prediction |
+| 7 | **Content-Type Bypass (JSON vs Form)** | 🔴 Hard | Auth Bypass + IDOR | Content-Type Switch |
 
----
 
-## 📋 Challenge Details
 
-### 1. Read Other Users' Orders (Easy)
-**Scenario:** Each user can view their own order details.  
-**Vulnerability:** The order ID in the URL is not checked against the logged-in user.  
-**Hint:** Login as `alice`, go to Orders, click "View Details", then change the number in the URL (`/orders/1` → `/orders/6`).  
-**Flag Format:** `FLAG{...}`
+## 🏪 App Features (Where to Look)
 
----
-
-### 2. Delete Other Users' Addresses (Medium)
-**Scenario:** Users can delete their saved addresses from the profile page.  
-**Vulnerability:** The `address_id` parameter is not validated for ownership before deletion.  
-**Hint:** Open DevTools (F12) → Network tab. Delete your own address and find the POST request. Change `address_id` in the request body.  
-**Flag Format:** `FLAG{...}`
-
----
-
-### 3. Download Private Attachments (Hard)
-**Scenario:** Support tickets allow file attachments that users can download.  
-**Vulnerability:** Attachment IDs are sequential and not protected by ownership checks.  
-**Hint:** Create a support ticket, note the attachment download URL (`/attachments/download/1`). Try changing the ID to `5`.  
-**Flag Format:** `FLAG{...}`
-
----
-
-### 4. Hijack Notification Settings (Medium)
-**Scenario:** Users can update their email/phone for notifications.  
-**Vulnerability:** The `subscription_id` in the update request is not verified to belong to the current user.  
-**Hint:** Go to Notification Settings, edit a subscription, then use the browser Console to send a fetch request with a different `subscription_id`.  
-**Flag Format:** `FLAG{...}`
-
----
-
-### 5. Checkout Hijack — Hidden IDOR in Request Body (Hard)
-**Scenario:** During product checkout, the user selects a shipping address.  
-**Vulnerability:** `shipping_address_id` is sent in the POST body without verifying it belongs to the user.  
-**Hint:** Go to Shop, click "Buy Now", open DevTools Network tab, find the `/api/checkout` request, and modify the `shipping_address_id` in the request payload.  
-**Flag Format:** `FLAG{...}`
+| Feature | Route | Challenge # |
+|---------|-------|-------------|
+| 📦 Order Tracking | `/orders` | #1 |
+| 👤 Profile & Addresses | `/profile` | #2 |
+| 🎫 Support Tickets | `/tickets` | #3 |
+| 🔔 Notification Settings | `/subscriptions` | #4 |
+| 🛍️ Product Shop & Checkout | `/shop` | #5 |
+| 📁 Shared Files & Comments | `/files` | #6 |
+| ⚙️ Account Settings | `/settings` | #7 |
+| 🎯 Submit Flags | `/challenges` | All |
 
 ---
 
@@ -94,11 +75,11 @@ Visit: **http://localhost:3000**
 | Tool | Purpose |
 |------|---------|
 | **Browser DevTools (F12)** | Inspect network requests, run JavaScript in Console |
-| **Burp Suite** | Intercept and modify HTTP requests |
-| **Postman** | Craft custom API requests |
+| **Burp Suite** | Intercept and modify HTTP requests (try changing Content-Type!) |
+| **Postman** | Craft custom API requests with different headers |
 | **curl** | Command-line HTTP client |
 
-
+---
 
 ## 🎓 What is IDOR?
 
@@ -108,33 +89,27 @@ Visit: **http://localhost:3000**
 
 | Type | Description | Challenges |
 |------|-------------|------------|
-| **URL Parameter** | ID in the URL path | #1, #3 |
+| **URL Parameter** | ID in the URL path | #1, #3, #6 |
 | **Request Body** | ID in POST/PUT body | #2, #4, #5 |
-| **Read IDOR** | Accessing others' data | #1, #3 |
-| **Write IDOR** | Modifying/deleting others' data | #2, #4, #5 |
+| **Read IDOR** | Accessing others' data | #1, #3, #6 |
+| **Write IDOR** | Modifying/deleting others' data | #2, #4, #5, #7 |
+| **Information Leak** | Leaked IDs lead to IDOR | #6 |
+| **Auth Bypass** | Switch Content-Type to bypass checks | #7 |
 
 ---
 
-## 💡 IDOR Testing Tips
+## 💡 IDOR Testing Tips (General)
 
-1. **Always check IDs in URLs, forms, and API requests**
-2. **Test with two different user accounts simultaneously**
-3. **Look for sequential or predictable IDs** (1, 2, 3...)
-4. **Check request bodies (JSON), not just URL parameters**
-5. **Monitor responses for leaked sensitive data**
-6. **Try negative IDs, zero, or very large numbers**
+1. **Check every ID** — URLs, forms, JSON bodies, hidden fields
+2. **Use two accounts** — Compare behavior across different users
+3. **Look for patterns** — Sequential, predictable, or timestamp-based IDs
+4. **Try different Content-Types** — JSON, form-urlencoded, XML, multipart
+5. **Monitor responses** — Leaked IDs, debug info, error messages
+6. **Chain vulnerabilities** — Info leak → IDOR → privilege escalation
+7. **Don't stop at 403** — Bypass techniques: change method, Content-Type, parameters
+8. **Check GUIDs/UUIDs** — They might be predictable or leaked elsewhere
 
----
 
-## 🔥 Pro Tips
-
-- 🕵️ Use **two browsers** or **Incognito mode** to login as different users
-- 📝 Keep the **Network tab** open to see all requests
-- 🧪 Try changing IDs in **both directions** (lower and higher)
-- 🔍 Look for IDs in **hidden fields**, **cookies**, and **headers**
-- 🎯 Submit flags on the `/challenges` page to verify your findings
-
----
 
 ## ⚠️ Warning
 
@@ -156,17 +131,17 @@ Visit: **http://localhost:3000**
 
 ## 📄 License
 
-MIT — Feel free to use for learning and teaching.
+MIT — Free to use for learning and teaching.
 
 ---
 
 ## 🏴‍☠️ Happy Hunting!
 
-Remember: The best way to learn security is to **think like an attacker** while **coding like a defender**.
-
 > "Every ID you see is a potential vulnerability. Check ownership. Always."
-```
+> 
+> "Don't trust the Content-Type. Don't trust the GUID. Verify everything server-side."
 
+---
 
 ## Author
 **cyberjson**

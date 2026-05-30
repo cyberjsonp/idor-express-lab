@@ -52,6 +52,26 @@ const challenges = [
         endpoint: 'POST /api/checkout',
         hint: 'Go to Shop, open DevTools Network tab, click "Buy Now" on a product. Find the POST request and change the shipping_address_id in the request body.',
         flag: 'FLAG{CH3CK0UT_H1J4CK}'
+    },
+    {
+        id: 6,
+        title: 'IDOR Chain - GUID Leak & File Access',
+        category: 'IDOR',
+        difficulty: 'Hard',
+        description: 'Files are protected by unguessable GUIDs. But can you find a way to leak the full GUID and then access private files?',
+        endpoint: '/share/:guid | POST /api/files/comment',
+        hint: '1) Go to Shared Files 2) Open a file 3) Post a comment 4) Check the server response carefully 5) Use the leaked GUID pattern to find admin\'s file (try changing last 3 digits).',
+        flag: 'FLAG{GUID_L34K_CH41N_IDOR}'
+    },
+    {
+        id: 7,
+        title: 'IDOR - Content-Type Bypass (JSON vs Form)',
+        category: 'IDOR',
+        difficulty: 'Hard',
+        description: 'The API checks authorization for JSON requests but forgets to validate form-urlencoded requests. Can you bypass the security check by changing the Content-Type header?',
+        endpoint: 'POST /api/user/update',
+        hint: '1) Go to Settings 2) Try updating with JSON (403 for other users) 3) Try form-urlencoded (bypass!) 4) Use Console to send form-encoded request with user_id=4 (admin)',
+        flag: 'FLAG{C0NT3NT_TYP3_BYP4SS}'
     }
 ];
 

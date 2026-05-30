@@ -12,6 +12,8 @@ const challengeRoutes = require('./routes/challenges');
 const ticketRoutes = require('./routes/tickets');
 const subscriptionRoutes = require('./routes/subscriptions');
 const checkoutRoutes = require('./routes/checkout');
+const fileShareRoutes = require('./routes/fileshare');
+const settingsRoutes = require('./routes/settings');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -40,6 +42,8 @@ app.use('/', challengeRoutes);
 app.use('/', ticketRoutes);
 app.use('/', subscriptionRoutes);
 app.use('/', checkoutRoutes);
+app.use('/', fileShareRoutes);
+app.use('/', settingsRoutes);
 
 app.get('/', (req, res) => {
     if (req.session.user) return res.redirect('/dashboard');
