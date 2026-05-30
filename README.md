@@ -1,6 +1,4 @@
-# 📝 `README.md` — نسخه آپدیت شده با ۷ چالش (بدون Hint)
 
-```markdown
 <h1 align="center" id="title">🛒 ShopVault — IDOR Bug Bounty Labs</h1>
 
 <p align="center"><img width=200 height=200 src="/public/kilroywashere.jpg" alt="project-image"></p>
