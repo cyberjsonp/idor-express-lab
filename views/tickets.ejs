@@ -1,0 +1,40 @@
+<div class="space-y-8 animate-fadeIn max-w-5xl mx-auto py-8">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-4xl font-black text-gray-900 mb-2">🎫 Support Tickets</h1>
+            <p class="text-gray-500">Manage your support requests</p>
+        </div>
+        <a href="#new-ticket" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">➕ New Ticket</a>
+    </div>
+
+    <% if (typeof success !== 'undefined' && success) { %><div class="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-xl"><span>✅</span> <%= success %></div><% } %>
+    <% if (typeof error !== 'undefined' && error) { %><div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl"><span>❌</span> <%= error %></div><% } %>
+
+    <% if (tickets.length === 0) { %>
+    <div class="text-center py-16 bg-white rounded-3xl shadow-lg"><div class="text-7xl mb-4">🎫</div><h3 class="text-2xl font-bold text-gray-900">No Tickets Yet</h3><p class="text-gray-500 mt-2">Create your first support ticket below!</p></div>
+    <% } else { %>
+    <div class="space-y-4">
+        <% tickets.forEach(function(ticket) { %>
+        <a href="/tickets/<%= ticket.id %>" class="block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-indigo-400 p-6 group">
+            <div class="flex items-center justify-between mb-2">
+                <code class="text-sm bg-gray-100 px-3 py-1 rounded-lg font-mono text-gray-600">#TKT-<%= String(ticket.id).padStart(3,'0') %></code>
+                <span class="px-3 py-1 rounded-full text-xs font-bold <%= ticket.status==='open'?'bg-green-100 text-green-700':ticket.status==='closed'?'bg-gray-100 text-gray-600':ticket.status==='classified'?'bg-red-100 text-red-700 animate-pulse':'bg-yellow-100 text-yellow-700' %>"><%= ticket.status %></span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 group-hover:text-indigo-600 transition"><%= ticket.subject %></h3>
+            <p class="text-gray-500 text-sm mt-1 line-clamp-2"><%= ticket.message %></p>
+            <div class="text-indigo-600 text-sm font-bold mt-3 group-hover:translate-x-1 transition-transform">View Details →</div>
+        </a>
+        <% }); %>
+    </div>
+    <% } %>
+
+    <!-- NEW TICKET FORM -->
+    <div id="new-ticket" class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <h2 class="text-2xl font-black text-gray-900 mb-6">➕ Create New Ticket</h2>
+        <form method="POST" action="/tickets" class="space-y-4">
+            <input type="text" name="subject" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 outline-none transition" placeholder="Subject" required>
+            <textarea name="message" rows="4" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-indigo-500 outline-none transition" placeholder="Describe your issue..." required></textarea>
+            <button type="submit" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-lg transition">📩 Submit Ticket</button>
+        </form>
+    </div>
+</div>

@@ -9,6 +9,9 @@ const homeRoutes = require('./routes/home');
 const orderRoutes = require('./routes/orders');
 const profileRoutes = require('./routes/profile');
 const challengeRoutes = require('./routes/challenges');
+const ticketRoutes = require('./routes/tickets');
+const subscriptionRoutes = require('./routes/subscriptions');
+const checkoutRoutes = require('./routes/checkout');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +37,9 @@ app.use('/', homeRoutes);
 app.use('/', orderRoutes);
 app.use('/', profileRoutes);
 app.use('/', challengeRoutes);
+app.use('/', ticketRoutes);
+app.use('/', subscriptionRoutes);
+app.use('/', checkoutRoutes);
 
 app.get('/', (req, res) => {
     if (req.session.user) return res.redirect('/dashboard');
