@@ -1,6 +1,6 @@
 <h1 align="center" id="title">IDOR BugBounty Labs</h1>
 
-<p align="center"><img src="/public/kilroywashere.jpg" alt="project-image"></p>
+<p align="center"><img width=200 height=200 src="/public/kilroywashere.jpg" alt="project-image"></p>
 
 
 
